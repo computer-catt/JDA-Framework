@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class CommandListener extends ListenerAdapter {
     public void onReady(ReadyEvent event) {
         CommandBase.UpdateCommands(event.getJDA());
+        Main.logger.info("Initialized and updated commands");
     }
 
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -18,12 +19,12 @@ public class CommandListener extends ListenerAdapter {
 
         for (CommandBase command : CommandBase.Commands) {
             if (command.CommandName().toLowerCase().equals(prefixLess)) {
-                command.onMessageReceived(event);
+                command.MessageCommand(event);
                 return;
             } else
                 for (String commandStr : command.CommandAliases())
                     if (commandStr.toLowerCase().equals(prefixLess)) {
-                        command.onMessageReceived(event);
+                        command.MessageCommand(event);
                         return;
                     }
         }
@@ -34,7 +35,7 @@ public class CommandListener extends ListenerAdapter {
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         for (CommandBase command : CommandBase.Commands)
             if (command.CommandName().equalsIgnoreCase(event.getName())) {
-                command.onSlashCommandInteraction(event);
+                command.SlashCommand(event);
                 break;
             }
     }

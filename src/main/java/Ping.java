@@ -1,10 +1,7 @@
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class Ping extends CommandBase{
-    public String CommandName() {
-        return "Ping";
-    }
+public class Ping extends CommandBase {
     public String[] CommandAliases() {
         return new String[]{"p"};
     }
